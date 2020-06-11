@@ -43,7 +43,6 @@ void checkDoc(int table[m][n], int *count) {
 }
 
 int checkcheoPhu(int table[20][20], int i, int j) {
-
   int p1,p2,p3,p4,p5; 
   int win=0,breakOut=0,breakOut2=0;
         //chéo phải
@@ -57,7 +56,6 @@ int checkcheoPhu(int table[20][20], int i, int j) {
               breakOut = 5;
               printf("\nWin cheo phai at\n ");
               printf("%d   %d\n", i, j);
-              printf("breakOut: %d\n", breakOut);
             }
         } 
         //chéo trái
@@ -71,7 +69,6 @@ int checkcheoPhu(int table[20][20], int i, int j) {
               breakOut = 5;
               printf("\nWin cheo trai at\n ");
               printf("%d   %d\n", i, j);
-              printf("breakOut: %d\n", breakOut);
             }
         } 
         return breakOut;
@@ -80,12 +77,10 @@ int checkcheoPhu(int table[20][20], int i, int j) {
 
 void checkCheo(int table[m][n], int *count){
   int k, m, out;
-  
   for(k=0;k<17;k++) {                                          
       for(m=0;m<17-k;m++) {
         *count=checkcheoPhu(table,m+k,m);
         if(*count==5) {
-          printf("first loop out: %d\n", *count);
           // goto breakStatement;
           break;
           }
@@ -96,14 +91,12 @@ void checkCheo(int table[m][n], int *count){
   for(k=0;k<17;k++){                                          
     for(m=0;m<17-k;m++) { 
       *count=checkcheoPhu(table,m,m+k);
-      if(*count==5) {
-        printf("second loop out: %d\n", *count); 
+      if(*count==5) { 
         // goto breakStatement;
         break;
         }
     }
     if(*count == 5){
-      printf("second loop out again: %d\n", *count);
       // goto breakStatement;
       break;
     }
@@ -113,12 +106,10 @@ void checkCheo(int table[m][n], int *count){
   for(k=0;k<17;k++) {                                           
     for(m=k;m<17;m++) {
       *count=checkcheoPhu(table,m,k+20-m);
-      
       if(*count==5) {
-        printf("third loop out: %d\n", *count); 
         // goto breakStatement;
         break;
-        }
+      }
     }
     if(*count == 5) return;   
   }
@@ -127,10 +118,9 @@ void checkCheo(int table[m][n], int *count){
     for(m=0;m<k;m++){
       *count=checkcheoPhu(table,m,k+3-m);
       if(*count==5) {
-        printf("fourth loop out%d\n", *count);
         break;
         // goto breakStatement;
-        }        
+      }        
     }
     if(*count == 5) return;   
   }
@@ -149,70 +139,68 @@ int main() {
 	int table[20][20] = {};
   
 	for (repeat = 0; repeat < 99999; repeat++) {
-		printf("\nplayer 1 nhập tọa độ x y\n");
+		printf("player 1 nhập tọa độ x y\n");
 		scanf("%d %d", &i, &j);
 		table[i][j] = 1;
 		printf("\n");
     
 		// in bảng
-    printf("   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19\n");
+        printf("      00  01  02  03  04  05  06  07  08  09  10  11  12  13  14  15  16  17  18  19\n");
 		for (i = 0; i < 20; i++) {
 			printf("%2d  ", i);
         for (j = 0; j < 20; j++) {
           if (table[i][j] == 2)
-					  printf("X ");
+					  printf("   X");
 				  else if (table[i][j] == 1)
-					  printf("O ");
+					  printf("   O");
 				  else
-            printf("   "); }
+            printf("    "); }
         printf("\n");
 		}
     
 		int wonDoc = 1, wonNgang = 1, wonCheo = 1;
     checkCheo(table, &wonCheo);
-    printf("\n%d wonCheo here after checkCheo", wonCheo);
     checkresult(&wonCheo);
-    printf("\n%d wonCheo after checkResult", wonCheo);
     checkDoc(table, &wonDoc); checkresult(&wonDoc);
     checkNgang(table, &wonNgang); checkresult(&wonNgang);
   
     if (wonDoc == 5 || wonCheo == 5 || wonNgang == 5) {
 			printf("player 1 win");
 			break;
-		}else{wonDoc = 0; wonCheo = 0; wonNgang = 0;}
+		}
+    else {wonDoc = 0; wonCheo = 0; wonNgang = 0; printf("\n");}
 
 
 
-		printf("\nplayer 2 nhập tọa độ x y\n");
+		printf("player 2 nhập tọa độ x y\n");
 		scanf("%d %d", &i, &j);    
 		table[i][j] = 2;
 		printf("\n");
+		
 		// in bảng
-		printf("   00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19\n");
-    for (i = 0; i < 20; i++) {
-      printf("%2d  ", i);
-      for (j = 0; j < 20; j++) {
-        if (table[i][j] == 2)
-					printf("X ");
-				else if (table[i][j] == 1)
-					printf("O ");
-				else
-          printf("   "); }
+		printf("      00  01  02  03  04  05  06  07  08  09  10  11  12  13  14  15  16  17  18  19\n");
+		for (i = 0; i < 20; i++) {
+			printf("%2d  ", i);
+        for (j = 0; j < 20; j++) {
+          if (table[i][j] == 2)
+					  printf("   X");
+				  else if (table[i][j] == 1)
+					  printf("   O");
+				  else
+            printf("    "); }
         printf("\n");
-    } 
+		}
 		
 		int wonDoc2 = 1, wonNgang2 = 1, wonCheo2 = 1;
     checkCheo(table, &wonCheo2); checkresult(&wonCheo2);
-    printf("\n%d wonCheo2 here", wonCheo2);
     checkDoc(table, &wonDoc2); checkresult(&wonDoc2);
     checkNgang(table, &wonNgang2); checkresult(&wonNgang2);
-    
 
     if (wonDoc2 == 5 || wonCheo2 == 5 || wonNgang2 == 5) {
 			printf("player 2 win");
 			break;
-		}else{wonDoc2 = 0; wonCheo2 = 0; wonNgang2 = 0;}
-
+		} 
+    else {wonDoc2 = 0; wonCheo2 = 0; wonNgang2 = 0;printf("\n");}
 
 	}
 
