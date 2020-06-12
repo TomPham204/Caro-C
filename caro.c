@@ -132,6 +132,21 @@ int checkresult(int *won){
   return res;
 }
 
+void red () {
+  printf("\033[1;31m   _");
+}
+
+void blue() {
+  printf("\033[1;34m");
+}
+
+void reset () {
+  printf("\033[0m");
+}
+
+void green(){
+  printf("\033[0;32m");
+}
 
 int main() {
 	int i, j, repeat;
@@ -149,12 +164,18 @@ int main() {
 		for (i = 0; i < 20; i++) {
 			printf("%2d  ", i);
         for (j = 0; j < 20; j++) {
-          if (table[i][j] == 2)
+          if (table[i][j] == 2){
+            blue();
 					  printf("   X");
-				  else if (table[i][j] == 1)
+          }
+				  else if (table[i][j] == 1){
+            green();
 					  printf("   O");
+          }
 				  else
-            printf("    "); }
+            red();
+          }
+          reset();
         printf("\n");
 		}
     
@@ -182,12 +203,18 @@ int main() {
 		for (i = 0; i < 20; i++) {
 			printf("%2d  ", i);
         for (j = 0; j < 20; j++) {
-          if (table[i][j] == 2)
+          if (table[i][j] == 2){
+            blue();
 					  printf("   X");
-				  else if (table[i][j] == 1)
+          }
+				  else if (table[i][j] == 1){
+            green();
 					  printf("   O");
+          }
 				  else
-            printf("    "); }
+            red();
+          }
+          reset();
         printf("\n");
 		}
 		
