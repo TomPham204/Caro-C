@@ -154,7 +154,7 @@ int main() {
 	int table[20][20] = {};
   
 	for (repeat = 0; repeat < 99999; repeat++) {
-		printf("player 1 nhập tọa độ x y\n");
+		printf("player 1 input coordination of x y\n");
 		scanf("%d %d", &i, &j);
 		table[i][j] = 1;
 		printf("\n");
@@ -186,14 +186,14 @@ int main() {
     checkNgang(table, &wonNgang); checkresult(&wonNgang);
   
     if (wonDoc == 5 || wonCheo == 5 || wonNgang == 5) {
-			printf("player 1 win");
+			printf("player 1 wins");
 			break;
 		}
     else {wonDoc = 0; wonCheo = 0; wonNgang = 0; printf("\n");}
 
 
 
-		printf("player 2 nhập tọa độ x y\n");
+		printf("player 2 input coordination of x y\n");
 		scanf("%d %d", &i, &j);    
 		table[i][j] = 2;
 		printf("\n");
@@ -224,7 +224,7 @@ int main() {
     checkNgang(table, &wonNgang2); checkresult(&wonNgang2);
 
     if (wonDoc2 == 5 || wonCheo2 == 5 || wonNgang2 == 5) {
-			printf("player 2 win");
+			printf("player 2 wins");
 			break;
 		} 
     else {wonDoc2 = 0; wonCheo2 = 0; wonNgang2 = 0;printf("\n");}
