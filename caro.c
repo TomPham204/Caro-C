@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <unistd.h>
 const int m = 20;
 const int n = 20;
 
@@ -9,7 +10,7 @@ void checkNgang(int table[m][n], int *counter){
     // int count=1;
     for(int i = 0; i < 20; i++){
       for(int j = 0; j < 20; j++){
-          if(table[i][j] == table[i][j+1] && table[i][j] == 1){
+          if(table[i][j] == table[i][j+1] && table[i][j] != 0){
               *counter+=1;
           }else if(*counter == 5){
             break;
@@ -27,7 +28,7 @@ int loopThroughColumns(int arr[m][n], int numRow, int numCol, int *count){
       if(*count == 5){
         return 1;
       };
-      if(arr[i][numCol] == arr[i+1][numCol] && arr[i][numCol] == 1) *count += 1;
+      if(arr[i][numCol] == arr[i+1][numCol] && arr[i][numCol] != 0) *count += 1;
       else *count = 1; continue;
     }
     return 0;
@@ -133,7 +134,8 @@ int checkresult(int *won){
 }
 
 void red () {
-  printf("\033[1;31m   _");
+  printf("\033[1;31m");
+  printf("   _");
 }
 
 void blue() {
@@ -149,14 +151,65 @@ void green(){
 }
 
 int main() {
-	int i, j, repeat;
+	int i, j, repeat,ex;
   int count=1;
 	int table[20][20] = {};
+
+char ten[11][22]={
+{'*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*'},
+{'*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','*'},
+{'*',' ',' ','C',' ',' ',' ',' ','A',' ',' ',' ',' ','R',' ',' ',' ',' ','O',' ',' ','*'},
+{'*',' ','C',' ','C',' ',' ','A',' ','A',' ',' ','R',' ','R',' ',' ','O',' ','O',' ','*'},
+{'*',' ','C',' ',' ',' ',' ','A',' ','A',' ',' ','R',' ','R',' ',' ','O',' ','O',' ','*'},
+{'*',' ','C',' ',' ',' ',' ','A','A','A',' ',' ','R','R',' ',' ',' ','O',' ','O',' ','*'},
+{'*',' ','C',' ',' ',' ',' ','A',' ','A',' ',' ','R',' ','R',' ',' ','O',' ','O',' ','*'},
+{'*',' ','C',' ','C',' ',' ','A',' ','A',' ',' ','R',' ','R',' ',' ','O',' ','O',' ','*'},
+{'*',' ',' ','C',' ',' ',' ','A',' ','A',' ',' ','R',' ','R',' ',' ',' ','O',' ',' ','*'},
+{'*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','*'},
+{'*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*'}};
+green();
+printf("\n\n");
+printf("enter 1 to play, enter 0 to exit\n\n");
+reset();
+scanf("%d",&ex);
+if(ex==0) exit(0);
+else {
+  printf("\n\n            |||||||||||||||||||    \n");
+  printf("           -Welcome new players-   \n");
+  printf("            |||||||||||||||||||    ");
+  printf("\n\n\n\n\n");
+  green(); 
+  for(i=0;i<11;i++) {
+    for(j=0;j<22;j++) 
+      printf("%2c",ten[i][j]); printf("\n");
+  }
+reset();
+printf("\n\n\n\n\n\n");
+sleep(2);
+  printf("      00  01  02  03  04  05  06  07  08  09  10  11  12  13  14  15  16  17  18  19\n");
+		for (i = 0; i < 20; i++) {
+			printf("%2d  ", i);
+        for (j = 0; j < 20; j++) {
+          if (table[i][j] == 2){
+            blue();
+					  printf("   X");
+          }
+				  else if (table[i][j] == 1){
+            green();
+					  printf("   O");
+          }
+				  else
+            red();
+          }
+          reset();
+        printf("\n");
+		}
   
 	for (repeat = 0; repeat < 99999; repeat++) {
-		printf("player 1 input coordination of x y\n");
+		printf("player 1 input coordinates of x y\n");
 		scanf("%d %d", &i, &j);
-		table[i][j] = 1;
+		if(table[i][j]==0) table[i][j] = 1;
+    else printf("enter another location");
 		printf("\n");
     
 		// in bảng
@@ -193,9 +246,10 @@ int main() {
 
 
 
-		printf("player 2 input coordination of x y\n");
+		printf("player 2 input coordinates of x y\n");
 		scanf("%d %d", &i, &j);    
-		table[i][j] = 2;
+		if(table[i][j]==0) table[i][j] = 2;
+    else printf("enter another location");
 		printf("\n");
 		
 		// in bảng
@@ -230,7 +284,6 @@ int main() {
     else {wonDoc2 = 0; wonCheo2 = 0; wonNgang2 = 0;printf("\n");}
 
 	}
-
+}
 	return 0;
 }
-    
